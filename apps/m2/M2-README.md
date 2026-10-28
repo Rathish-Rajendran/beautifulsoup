@@ -171,6 +171,9 @@ for HTML, case-sensitive for XML); namespace matching uses the local name.
 ## Tests and build
 
 `python -m pytest -q` reports **901 passed, 7 skipped** in the recorded local run.
+Use Python 3.10.13 or 3.11.5 for the original suite: newer Python patch releases
+accept malformed declarations that three upstream rejection tests expect to fail.
+CI uses these exact runtime versions; no original tests are weakened or skipped.
 The original suite contributes 829 passes and seven existing skips; M2 contributes
 58 API test instances and 14 application tests.
 

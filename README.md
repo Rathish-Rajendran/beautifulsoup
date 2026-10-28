@@ -6,7 +6,9 @@ MIT attribution are preserved; this is a course extension, not an upstream relea
 
 ## Grader quick start
 
-Use Python 3.10+ (locally verified with Python 3.11.5). From a fresh clone:
+Use Python **3.10.13 or 3.11.5** to reproduce the supplied source tests
+(locally verified with 3.11.5). Let `python3` below name that interpreter.
+From a fresh clone:
 
 ```sh
 git clone https://github.com/Rathish-Rajendran/SWE262P_Project.git
@@ -23,8 +25,10 @@ Recorded local result: **901 passed, 7 skipped**; the seven skips are existing
 upstream tests. The build produces a wheel and source archive under `dist/`.
 For an explicit interpreter: `PYTHON=.venv/bin/python ./build.sh`.
 The development requirements pin lxml 5.3.2 because lxml 6.1.3 changes three
-behaviors expected by the unmodified course-source tests. CI checks Python 3.10
-and 3.11, runs the suite, builds the package, and tests the wheel outside the checkout.
+behaviors expected by the unmodified course-source tests. CI checks Python 3.10.13
+and 3.11.5, runs the suite, builds the package, and tests the wheel outside the checkout. Newer Python patch releases change
+malformed-declaration handling in `html.parser`, making three original rejection
+tests fail; the exact runtime versions avoid that upstream test incompatibility.
 
 ## Run the required applications
 

@@ -147,9 +147,10 @@ def main():
     if file_hash(path) != initial_hash:
         raise AssertionError("Input changed during validation")
     import lxml.etree
+    import soupsieve
     report = {
         "python": platform.python_version(), "platform": platform.platform(),
-        "bs4": __version__, "lxml": lxml.etree.LXML_VERSION, "libxml": lxml.etree.LIBXML_VERSION,
+        "bs4": __version__, "soupsieve": soupsieve.__version__, "lxml": lxml.etree.LXML_VERSION, "libxml": lxml.etree.LIBXML_VERSION,
         "input": path.name, "input_bytes": path.stat().st_size, "input_sha256": initial_hash,
         "parser": args.parser, "repeats": args.repeats,
         "timing_scope": "Read and construct tree, plus post-parse rename for baseline task 6; excludes query, serialization, startup.",

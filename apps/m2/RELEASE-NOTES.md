@@ -5,7 +5,7 @@ Included deliverables:
 - Original API source locations linked to the unchanged `canvas-baseline` tag.
 - 58 API test instances and 14 CLI tests; full local suite: **901 passed, 7 existing upstream skips**.
 - Reproducible 16 MiB experiments: all four actual M1/M2 application outputs are byte-for-byte identical. Raw timing, memory, and hashes are committed.
-- Build script, development requirements, installable wheel/source archive, and CI for Python 3.10/3.11.
+- Build script, development requirements, installable wheel/source archive, and CI for Python 3.10.13/3.11.5.
 
 Start with the root README and `apps/m2/M2-README.md`. Supported replacement backends are html.parser and lxml HTML/XML; using html5lib with a replacer raises an explicit error. Task 3's all-tag strainer retains the full tree, and the measured task 6 timing is essentially equal to the post-parse baseline; the implementation removes the redundant scan and match list.
 

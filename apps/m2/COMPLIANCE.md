@@ -10,6 +10,7 @@ are in [M2-README.md](M2-README.md).
 | Requirement | Implementation and evidence |
 | --- | --- |
 | Repository named `beautifulsoup` | [Rathish-Rajendran/beautifulsoup](https://github.com/Rathish-Rajendran/beautifulsoup); the clone directory and local project directory are also named `beautifulsoup`. |
+| Public repository setup | The repository is public, matching the setup README's GitHub CLI example and allowing access to the source and release without invitations. |
 | Use the supplied BeautifulSoup source | Imported BeautifulSoup 4.13.0; all 32 original `bs4` Python files at `canvas-baseline` match the supplied ZIP byte for byte. |
 | New library API inside `bs4/` | `bs4/replacer.py` defines `SoupReplacer`; `bs4/__init__.py` exports it and integrates it with construction. |
 | New tests inside `bs4/tests/` | `test_replacer.py` contains 58 API test instances; `test_m2_apps.py` contains 14 application tests. |
@@ -85,7 +86,6 @@ modified or newly skipped to make the extension pass.
 
 ## Submission access
 
-The repository is private. The grading account must have access to the repository
-and release before the release URL is submitted on Canvas. The setup README's
-GitHub CLI example uses public visibility; private visibility requires arranging
-that access. Canvas submission is a separate step from publishing the release.
+The repository and release are public, matching the setup README's public GitHub
+repository example. The submission URL is the `milestone-2` release linked above.
+Canvas submission is a separate step from publishing the release.

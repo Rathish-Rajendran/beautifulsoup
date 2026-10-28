@@ -11,4 +11,4 @@ Included deliverables:
 Start with the root README and `apps/m2/M2-README.md`. Supported replacement backends are html.parser and lxml HTML/XML; using html5lib with a replacer raises an explicit error. Task 3's all-tag strainer retains the full tree, and the measured task 6 timing is essentially equal to the post-parse baseline; the implementation removes the redundant scan and match list.
 
 Repository: [Rathish-Rajendran/beautifulsoup](https://github.com/Rathish-Rajendran/beautifulsoup).
-The repository name and source layout match the assignment. The repository is private; grading requires repository access. The detailed requirement review is in `apps/m2/COMPLIANCE.md`.
+The public repository name, visibility, and source layout match the assignment setup. The detailed requirement review is in `apps/m2/COMPLIANCE.md`.

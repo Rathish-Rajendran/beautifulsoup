@@ -86,8 +86,8 @@ The Milestone 3 callable/attribute transformations are outside this milestone.
 - `canvas-baseline` contains the unmodified imported source. All 32 original `bs4`
   Python files were verified byte-for-byte against the supplied ZIP.
 - `apps/m1/` preserves the previously implemented Milestone 1 programs unchanged.
-- The repository is named **beautifulsoup**, matching the assignment. It is private;
-  the grader must have repository access to open the submission link.
+- The repository is public and named **beautifulsoup**, matching the assignment
+  setup. The release and source are accessible without an invitation.
 
 See [M2-README.md](apps/m2/M2-README.md) for the milestone answers and design details,
 and [COMPLIANCE.md](apps/m2/COMPLIANCE.md) for the requirement-by-requirement review.

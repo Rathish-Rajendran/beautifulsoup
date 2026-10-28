@@ -202,5 +202,5 @@ outside the checkout to ensure the new module is actually packaged.
 The submission is the `milestone-2` release/tag of
 [`Rathish-Rajendran/beautifulsoup`](https://github.com/Rathish-Rajendran/beautifulsoup),
 with the exact repository name and source layout specified in the assignment.
-The repository is private and requires grader access. See [COMPLIANCE.md](COMPLIANCE.md)
-for the detailed requirement review.
+The repository is public, so the source and release are accessible for grading.
+See [COMPLIANCE.md](COMPLIANCE.md) for the detailed requirement review.

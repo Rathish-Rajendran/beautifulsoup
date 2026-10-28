@@ -13,7 +13,7 @@ are in [M2-README.md](M2-README.md).
 | Public repository setup | The repository is public, matching the setup README's GitHub CLI example and allowing access to the source and release without invitations. |
 | Use the supplied BeautifulSoup source | Imported BeautifulSoup 4.13.0; all 32 original `bs4` Python files at `canvas-baseline` match the supplied ZIP byte for byte. |
 | New library API inside `bs4/` | `bs4/replacer.py` defines `SoupReplacer`; `bs4/__init__.py` exports it and integrates it with construction. |
-| New tests inside `bs4/tests/` | `test_replacer.py` contains 58 API test instances; `test_m2_apps.py` contains 14 application tests. |
+| New tests inside `bs4/tests/` | `test_replacer.py` contains 58 API test instances; `test_m2_apps.py` contains 14 application tests; `test_m2_validation.py` contains 10 validation/guard tests. |
 | Application tasks inside `apps/m2/` | Separate `task2.py`, `task3.py`, `task4.py`, and `task6.py` files. |
 | Milestone README inside `apps/m2/` | `M2-README.md` answers Parts 1–3, including the source locations and replacement implementation. |
 | Root README explains installation and repository setup | Fresh clone, checkout, environment creation, dependencies, test, build, and application commands are included. |
@@ -27,12 +27,14 @@ are in [M2-README.md](M2-README.md).
 | Task 2 using SoupStrainer | `task2.py` constructs the soup with `parse_only=SoupStrainer("a", href=True)` and prints hyperlink destinations. |
 | Task 3 using SoupStrainer | `task3.py` attempts `parse_only=SoupStrainer(True)` and prints every tag. The README explains why retaining all tags also retains the full tree. |
 | Task 4 using SoupStrainer | `task4.py` constructs the soup with `parse_only=SoupStrainer(id=True)` and uses one `find_all(id=True)` call to select output elements. |
-| Each application tested on a large HTML or XML file | All three applications were executed on a deterministic 16,777,216-byte HTML file and compared with the unchanged Milestone 1 applications. All output bytes match. |
+| Each application tested on a large HTML or XML file | All three applications were executed on both 1,073,741,824-byte (1 GiB) and 16,777,216-byte HTML files. All output bytes match the unchanged Milestone 1 applications, and the 1 GiB outputs also pass an independent incremental reference check. |
 | Explain filter behavior accurately | Accepted subtrees include descendants that may not match the strainer. Follow-up result queries exclude those descendants when necessary. The README records the all-tag limitation and full-input reading behavior. |
 
-The large-file generator is committed instead of the generated 16 MiB file.
-`generate_large_input.py` recreates it, and `validation.json` records its SHA-256,
-input size, node counts, individual runs, memory measurements, and output hashes.
+The generator is committed instead of the generated large files.
+`generate_large_input.py` recreates both profiles. `validation-gb.json` records the
+1 GiB application runs, independent reference fingerprints, and resource limits;
+`validation.json` records the repeated 16 MiB measurements. Both include input and
+output hashes and verification results.
 
 ## Part 2 — original API definitions
 
@@ -58,7 +60,7 @@ file and command-line APIs are identified separately from library APIs.
 | Replacement during parsing | The existing `popTag()` close event invokes the replacer after original-name stack bookkeeping. There is no replacement search after parsing. |
 | At least two new API test cases | `test_replaces_all_b_tags` and `test_nested_replacements_keep_closing_tags_and_siblings`, each parameterized over html.parser, lxml HTML, and XML. |
 | Verify the parse-time performance benefit | A custom test builder observes a renamed node before `feed()` returns while `find_all` is patched to fail. This verifies the operation occurs inside construction without an added search. |
-| Application implementing task 6 through the API | `task6.py` passes the replacer during construction and saves the modified document, without a rename loop or replacement search. Its output matches Milestone 1 on HTML, XML, and the 16 MiB HTML input. |
+| Application implementing task 6 through the API | `task6.py` passes the replacer during construction and saves the modified document, without a rename loop or replacement search. Its output matches Milestone 1 on HTML, XML, and both the 16 MiB and 1 GiB HTML inputs; all 65,220 bold elements in the 1 GiB case were replaced. |
 
 The implementation preserves node identity, attributes, children, namespace
 prefixes/URIs, and tree links. It retains source names on the open-tag stack until
@@ -75,8 +77,8 @@ and tested. Attribute and functional transformations are Milestone 3 work.
 | Criterion | Points | Verification |
 | --- | ---: | --- |
 | Completeness | 5 | Required applications, API integration, original-source answers, and new tests are present in the specified directories. |
-| Correctness | 50 | Full local suite: 901 passed, seven pre-existing upstream skips. New cases cover nested/unfinished tags, XML, attributes, links, filtering, defaults, invalid inputs, copy/pickle, and CLI input preservation. |
-| Performance | 40 | Replacement uses existing parser close events, eliminating the separate O(N) tree search and O(K) match list. The 16 MiB experiment reports actual measurements without promising a universal speedup. |
+| Correctness | 50 | Full local suite: 911 passed, seven pre-existing upstream skips. New cases cover nested/unfinished tags, XML, attributes, links, filtering, defaults, invalid inputs, copy/pickle, and CLI input preservation. |
+| Performance | 40 | Replacement uses existing parser close events, eliminating the separate O(N) tree search and O(K) match list. The 1 GiB stress run and repeated 16 MiB experiment report actual measurements without promising a universal speedup. |
 | Build | 5 | Executable `build.sh`, existing Hatch/PEP 517 configuration, pinned development dependencies, wheel/source archive, and CI build plus wheel-install verification. |
 
 The reproducible test runtimes are Python 3.10.13 and 3.11.5 with lxml 5.3.2.

@@ -72,6 +72,7 @@ include = [
     "/apps/**/*.md",
     "/apps/m2/fixtures/*",
     "/apps/m2/validation.json",
+    "/apps/m2/validation-gb.json",
     "/build.sh",
     "/requirements-dev.txt",
     "/.github/workflows/ci.yml",

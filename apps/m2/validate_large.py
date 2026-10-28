@@ -33,6 +33,19 @@ def file_hash(path):
     return digest.hexdigest()
 
 
+def files_equal(first, second):
+    """Compare outputs without loading either full file into memory."""
+    if first.stat().st_size != second.stat().st_size:
+        return False
+    with first.open("rb") as left, second.open("rb") as right:
+        while True:
+            chunk = left.read(1024 * 1024)
+            if chunk != right.read(1024 * 1024):
+                return False
+            if not chunk:
+                return True
+
+
 def worker(path, task, optimized, parser):
     kwargs = {}
     if optimized:
@@ -97,7 +110,7 @@ def validate_cli(path, parser):
                 if result.returncode:
                     raise RuntimeError(result.stderr.decode("utf-8", "replace"))
                 outputs.append(output)
-            if outputs[0].read_bytes() != outputs[1].read_bytes():
+            if not files_equal(outputs[0], outputs[1]):
                 raise AssertionError(f"Task {task}: M1 and M2 output differs")
             checks.append({"task": task, "identical": True, "output_bytes": outputs[1].stat().st_size,
                            "output_sha256": file_hash(outputs[1])})

@@ -30,6 +30,70 @@ and `task4.py`. Task 3 includes the all-tag strainer attempt and its limitations
 
 ## Large-file validation
 
+### 1 GiB validation
+
+The primary large-file run uses **1,073,741,824 bytes (1 GiB, about 1.074 GB)** of
+well-formed generated HTML. It contains **130,437 sections/paragraphs, 334,252 tags,
+4,077 hyperlinks, 2,039 IDs, and 65,220 nested bold elements**. Text is distributed
+among the paragraphs; this is not a file containing one oversized text node.
+Each paragraph contains 1,024 repetitions of `padding ` (8 KiB). The separate
+16 MiB fixture below uses 128 repetitions per paragraph, so these profiles do not
+support a simple linear node-count scaling comparison.
+
+Reproduce from the repository root after activating the environment:
+
+```sh
+python apps/m2/generate_large_input.py apps/m2/generated/large-1GiB.html --mib 1024 --padding-words 1024
+python apps/m2/validate_gb.py apps/m2/generated/large-1GiB.html
+```
+
+The 1 GiB input and generated output files are kept under the Git-ignored
+`apps/m2/generated/` directory. The generator and the small machine-readable
+[validation-gb.json](validation-gb.json) result are committed. The result records
+exact file size, hashes, reference counts, all eight actual application runs,
+limits, output fingerprints, and comparisons. Input SHA-256:
+`2e8cf3959e5a62abb7dc231bc45a3aace9f0d29a723d3e30f313a51adfc3fd9f`.
+
+Each unchanged M1 and M2 application was run **once**, sequentially, using
+`html.parser`, Python 3.11.5, BeautifulSoup 4.13.0, and the pinned dependencies on
+macOS arm64 with 18 GiB RAM. This is a correctness/stress run, not a repeated
+statistical timing benchmark.
+
+| Task | M1 total seconds | M2 total seconds | M1 sampled peak RSS MiB | M2 sampled peak RSS MiB | Output comparison |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 2 | 10.216 | 7.028 | 1932.9 | 2082.3 | Passed |
+| 3 | 10.099 | 10.325 | 1836.0 | 1691.9 | Passed |
+| 4 | 10.493 | 7.953 | 1756.7 | 1632.5 | Passed |
+| 6 | 19.310 | 18.699 | 2479.8 | 2784.8 | Passed |
+
+These times include startup, reading, parsing, searching/replacement, writing
+output, and monitoring. Independent verification time is excluded. They are
+**different measurements** from the construction-only timings in the 16 MiB table.
+RSS was sampled about every 0.1 seconds; short-lived peaks may be higher. The
+monitor stopped applications exceeding 6,144 MiB sampled RSS or 300 seconds, or
+when system free memory fell below 15% (checked about every two seconds on macOS).
+**No guard triggered**; the lowest observed system free percentage was 31%.
+
+All four M2 applications completed, and all four M1/M2 pairs produced
+**byte-for-byte identical outputs**. An independent incremental standard-library
+HTMLParser scanner also verified the exact task 2/3/4 output hashes. For task 6,
+it verified structure and attributes after normalizing `blockquote` back to `b`,
+whitespace-normalized text, zero remaining `b` elements, and exactly 65,220
+`blockquote` elements. The input hash was unchanged.
+
+Verification reads files in chunks and does not construct another BeautifulSoup
+tree or load two gigabyte-sized output files into memory. The monitor has tests
+for timeouts, memory limits, low system memory, and cleanup after monitoring errors.
+
+The GB-scale RSS values do not show a universal reduction: task 2's sampled peak
+was higher with M2. BeautifulSoup still reads the entire input, and transient
+allocations, caching, and memory compression affect process RSS. The smaller
+repeated experiment below demonstrates the strainer's retained-node reduction.
+The parse-time replacer continues to avoid the extra replacement search/list;
+this run shows a modest task 6 runtime difference, not a guaranteed speedup.
+
+### 16 MiB comparison benchmark
+
 Generate the exact deterministic 16 MiB input and rerun the experiment from the
 repository root, after activating the environment:
 
@@ -77,8 +141,8 @@ per soup and O(1) replacement work per close event (treating name lengths as bou
 Beyond the timed in-process API comparisons, the validator executes all four actual
 M1/M2 application pairs against the large input and checks **byte-for-byte identical
 output**, including the saved task 6 document. All passed, and the input hash stayed
-unchanged. Milestone 2 asks for large-file validation; it does not add a new GB-scale
-requirement. The earlier 1 GiB Milestone 1 results remain in `apps/m1/README.md`.
+unchanged. These repeated 16 MiB measurements supplement the M2-specific 1 GiB
+validation above. The separate earlier Milestone 1 results remain in `apps/m1/README.md`.
 
 ## Part 2: original API locations
 
@@ -170,12 +234,12 @@ for HTML, case-sensitive for XML); namespace matching uses the local name.
 
 ## Tests and build
 
-`python -m pytest -q` reports **901 passed, 7 skipped** in the recorded local run.
+`python -m pytest -q` reports **911 passed, 7 skipped** in the recorded local run.
 Use Python 3.10.13 or 3.11.5 for the original suite: newer Python patch releases
 accept malformed declarations that three upstream rejection tests expect to fail.
 CI uses these exact runtime versions; no original tests are weakened or skipped.
 The original suite contributes 829 passes and seven existing skips; M2 contributes
-58 API test instances and 14 application tests.
+58 API test instances, 14 application tests, and 10 validation-harness tests.
 
 The two primary API cases are
 `test_replaces_all_b_tags` and `test_nested_replacements_keep_closing_tags_and_siblings`,
@@ -195,7 +259,7 @@ outside the checkout to ensure the new module is actually packaged.
 | Criterion | Points | Evidence |
 | --- | ---: | --- |
 | Completeness | 5 | Three Part 1 programs, all original API locations, SoupReplacer and constructor integration, required cases plus edge tests, task 6 app |
-| Correctness | 50 | Full suite passes; HTML/XML app comparisons; all four actual CLI outputs verified on 16 MiB input |
+| Correctness | 50 | Full suite passes; HTML/XML app comparisons; all four actual CLI outputs verified on 16 MiB and 1 GiB inputs |
 | Performance | 40 | Existing close-event hook; no new tree walk or O(K) replacement list; structural proof and candid timing/memory measurements |
 | Build | 5 | Executable `build.sh`, reproducible requirements, wheel/sdist build and install verification, CI |
 

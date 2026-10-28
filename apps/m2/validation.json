@@ -2,6 +2,7 @@
   "python": "3.11.5",
   "platform": "macOS-26.5-arm64-arm-64bit",
   "bs4": "4.13.0",
+  "soupsieve": "2.6",
   "lxml": [
     5,
     3,
@@ -24,29 +25,29 @@
     {
       "task": 2,
       "mode": "full_parse",
-      "median_construction_seconds": 0.4319792919559404,
-      "max_peak_process_mib": 139.046875,
+      "median_construction_seconds": 0.42435845802538097,
+      "max_peak_process_mib": 139.8125,
       "retained_tags": 40416,
       "matches": 493,
       "result_sha256": "35a01fff0843ddc0a6f8b87ba240d863dedfcc5b29936e9b0d3f87d4d488c35c",
       "runs": [
         {
-          "construction_seconds": 0.44779179198667407,
-          "peak_process_mib": 139.046875,
+          "construction_seconds": 0.4267167500220239,
+          "peak_process_mib": 138.015625,
           "retained_tags": 40416,
           "matches": 493,
           "result_sha256": "35a01fff0843ddc0a6f8b87ba240d863dedfcc5b29936e9b0d3f87d4d488c35c"
         },
         {
-          "construction_seconds": 0.4319792919559404,
-          "peak_process_mib": 137.84375,
+          "construction_seconds": 0.42435845802538097,
+          "peak_process_mib": 139.8125,
           "retained_tags": 40416,
           "matches": 493,
           "result_sha256": "35a01fff0843ddc0a6f8b87ba240d863dedfcc5b29936e9b0d3f87d4d488c35c"
         },
         {
-          "construction_seconds": 0.43012079095933586,
-          "peak_process_mib": 138.09375,
+          "construction_seconds": 0.41857587499544024,
+          "peak_process_mib": 137.796875,
           "retained_tags": 40416,
           "matches": 493,
           "result_sha256": "35a01fff0843ddc0a6f8b87ba240d863dedfcc5b29936e9b0d3f87d4d488c35c"
@@ -56,29 +57,29 @@
     {
       "task": 2,
       "mode": "m2",
-      "median_construction_seconds": 0.23235391697380692,
-      "max_peak_process_mib": 67.828125,
+      "median_construction_seconds": 0.2430649580201134,
+      "max_peak_process_mib": 66.890625,
       "retained_tags": 986,
       "matches": 493,
       "result_sha256": "35a01fff0843ddc0a6f8b87ba240d863dedfcc5b29936e9b0d3f87d4d488c35c",
       "runs": [
         {
-          "construction_seconds": 0.2396407499909401,
-          "peak_process_mib": 67.828125,
+          "construction_seconds": 0.2430649580201134,
+          "peak_process_mib": 66.828125,
           "retained_tags": 986,
           "matches": 493,
           "result_sha256": "35a01fff0843ddc0a6f8b87ba240d863dedfcc5b29936e9b0d3f87d4d488c35c"
         },
         {
-          "construction_seconds": 0.23081954196095467,
-          "peak_process_mib": 66.90625,
+          "construction_seconds": 0.2467965839896351,
+          "peak_process_mib": 66.828125,
           "retained_tags": 986,
           "matches": 493,
           "result_sha256": "35a01fff0843ddc0a6f8b87ba240d863dedfcc5b29936e9b0d3f87d4d488c35c"
         },
         {
-          "construction_seconds": 0.23235391697380692,
-          "peak_process_mib": 66.90625,
+          "construction_seconds": 0.23327308404259384,
+          "peak_process_mib": 66.890625,
           "retained_tags": 986,
           "matches": 493,
           "result_sha256": "35a01fff0843ddc0a6f8b87ba240d863dedfcc5b29936e9b0d3f87d4d488c35c"
@@ -88,29 +89,29 @@
     {
       "task": 3,
       "mode": "full_parse",
-      "median_construction_seconds": 0.4218077079858631,
-      "max_peak_process_mib": 138.84375,
+      "median_construction_seconds": 0.44603045796975493,
+      "max_peak_process_mib": 138.71875,
       "retained_tags": 40416,
       "matches": 40416,
       "result_sha256": "6ad117d1740b81aedbdd68d08b09e28de7350a749c31ef7a44b52357ff4f7e46",
       "runs": [
         {
-          "construction_seconds": 0.4140642919810489,
-          "peak_process_mib": 138.84375,
+          "construction_seconds": 0.5890785830561072,
+          "peak_process_mib": 138.640625,
           "retained_tags": 40416,
           "matches": 40416,
           "result_sha256": "6ad117d1740b81aedbdd68d08b09e28de7350a749c31ef7a44b52357ff4f7e46"
         },
         {
-          "construction_seconds": 0.4409826670307666,
-          "peak_process_mib": 138.171875,
+          "construction_seconds": 0.4298321249661967,
+          "peak_process_mib": 138.1875,
           "retained_tags": 40416,
           "matches": 40416,
           "result_sha256": "6ad117d1740b81aedbdd68d08b09e28de7350a749c31ef7a44b52357ff4f7e46"
         },
         {
-          "construction_seconds": 0.4218077079858631,
-          "peak_process_mib": 138.03125,
+          "construction_seconds": 0.44603045796975493,
+          "peak_process_mib": 138.71875,
           "retained_tags": 40416,
           "matches": 40416,
           "result_sha256": "6ad117d1740b81aedbdd68d08b09e28de7350a749c31ef7a44b52357ff4f7e46"
@@ -120,29 +121,29 @@
     {
       "task": 3,
       "mode": "m2",
-      "median_construction_seconds": 0.41569945798255503,
-      "max_peak_process_mib": 138.796875,
+      "median_construction_seconds": 0.4308020840398967,
+      "max_peak_process_mib": 138.3125,
       "retained_tags": 40416,
       "matches": 40416,
       "result_sha256": "6ad117d1740b81aedbdd68d08b09e28de7350a749c31ef7a44b52357ff4f7e46",
       "runs": [
         {
-          "construction_seconds": 0.41490424994844943,
-          "peak_process_mib": 138.796875,
+          "construction_seconds": 0.43637191702146083,
+          "peak_process_mib": 138.25,
           "retained_tags": 40416,
           "matches": 40416,
           "result_sha256": "6ad117d1740b81aedbdd68d08b09e28de7350a749c31ef7a44b52357ff4f7e46"
         },
         {
-          "construction_seconds": 0.4178045829758048,
-          "peak_process_mib": 138.390625,
+          "construction_seconds": 0.4308020840398967,
+          "peak_process_mib": 138.3125,
           "retained_tags": 40416,
           "matches": 40416,
           "result_sha256": "6ad117d1740b81aedbdd68d08b09e28de7350a749c31ef7a44b52357ff4f7e46"
         },
         {
-          "construction_seconds": 0.41569945798255503,
-          "peak_process_mib": 138.171875,
+          "construction_seconds": 0.4203206249512732,
+          "peak_process_mib": 138.125,
           "retained_tags": 40416,
           "matches": 40416,
           "result_sha256": "6ad117d1740b81aedbdd68d08b09e28de7350a749c31ef7a44b52357ff4f7e46"
@@ -152,29 +153,29 @@
     {
       "task": 4,
       "mode": "full_parse",
-      "median_construction_seconds": 0.418346666963771,
-      "max_peak_process_mib": 138.296875,
+      "median_construction_seconds": 0.42801354092080146,
+      "max_peak_process_mib": 137.9375,
       "retained_tags": 40416,
       "matches": 247,
       "result_sha256": "59df317744dd482c245af10e385b3eb615f797bc6f3a2cfa1cc28f2f09b87500",
       "runs": [
         {
-          "construction_seconds": 0.4153050410095602,
-          "peak_process_mib": 137.828125,
+          "construction_seconds": 0.4353177909506485,
+          "peak_process_mib": 137.890625,
           "retained_tags": 40416,
           "matches": 247,
           "result_sha256": "59df317744dd482c245af10e385b3eb615f797bc6f3a2cfa1cc28f2f09b87500"
         },
         {
-          "construction_seconds": 0.43592687498312443,
-          "peak_process_mib": 138.296875,
+          "construction_seconds": 0.4221757079940289,
+          "peak_process_mib": 137.9375,
           "retained_tags": 40416,
           "matches": 247,
           "result_sha256": "59df317744dd482c245af10e385b3eb615f797bc6f3a2cfa1cc28f2f09b87500"
         },
         {
-          "construction_seconds": 0.418346666963771,
-          "peak_process_mib": 138.28125,
+          "construction_seconds": 0.42801354092080146,
+          "peak_process_mib": 137.90625,
           "retained_tags": 40416,
           "matches": 247,
           "result_sha256": "59df317744dd482c245af10e385b3eb615f797bc6f3a2cfa1cc28f2f09b87500"
@@ -184,29 +185,29 @@
     {
       "task": 4,
       "mode": "m2",
-      "median_construction_seconds": 0.24388270894996822,
-      "max_peak_process_mib": 68.5,
+      "median_construction_seconds": 0.25804149999748915,
+      "max_peak_process_mib": 68.453125,
       "retained_tags": 1482,
       "matches": 247,
       "result_sha256": "59df317744dd482c245af10e385b3eb615f797bc6f3a2cfa1cc28f2f09b87500",
       "runs": [
         {
-          "construction_seconds": 0.2511016660137102,
-          "peak_process_mib": 68.046875,
+          "construction_seconds": 0.25804149999748915,
+          "peak_process_mib": 67.96875,
           "retained_tags": 1482,
           "matches": 247,
           "result_sha256": "59df317744dd482c245af10e385b3eb615f797bc6f3a2cfa1cc28f2f09b87500"
         },
         {
-          "construction_seconds": 0.24383208295330405,
-          "peak_process_mib": 68.5,
+          "construction_seconds": 0.24365274992305785,
+          "peak_process_mib": 68.453125,
           "retained_tags": 1482,
           "matches": 247,
           "result_sha256": "59df317744dd482c245af10e385b3eb615f797bc6f3a2cfa1cc28f2f09b87500"
         },
         {
-          "construction_seconds": 0.24388270894996822,
-          "peak_process_mib": 67.984375,
+          "construction_seconds": 0.2604269169969484,
+          "peak_process_mib": 67.875,
           "retained_tags": 1482,
           "matches": 247,
           "result_sha256": "59df317744dd482c245af10e385b3eb615f797bc6f3a2cfa1cc28f2f09b87500"
@@ -216,29 +217,29 @@
     {
       "task": 6,
       "mode": "full_parse",
-      "median_construction_seconds": 0.4258677919860929,
-      "max_peak_process_mib": 196.65625,
+      "median_construction_seconds": 0.4493575419764966,
+      "max_peak_process_mib": 190.234375,
       "retained_tags": 40416,
       "matches": 7886,
       "result_sha256": "1362f56ee560f63a5eeffe8d07480e8de084c0362dd51e27df2f166f7923ff26",
       "runs": [
         {
-          "construction_seconds": 0.42359600006602705,
-          "peak_process_mib": 196.65625,
+          "construction_seconds": 0.4500907079782337,
+          "peak_process_mib": 188.640625,
           "retained_tags": 40416,
           "matches": 7886,
           "result_sha256": "1362f56ee560f63a5eeffe8d07480e8de084c0362dd51e27df2f166f7923ff26"
         },
         {
-          "construction_seconds": 0.4329702079994604,
-          "peak_process_mib": 187.859375,
+          "construction_seconds": 0.43626970797777176,
+          "peak_process_mib": 184.609375,
           "retained_tags": 40416,
           "matches": 7886,
           "result_sha256": "1362f56ee560f63a5eeffe8d07480e8de084c0362dd51e27df2f166f7923ff26"
         },
         {
-          "construction_seconds": 0.4258677919860929,
-          "peak_process_mib": 195.703125,
+          "construction_seconds": 0.4493575419764966,
+          "peak_process_mib": 190.234375,
           "retained_tags": 40416,
           "matches": 7886,
           "result_sha256": "1362f56ee560f63a5eeffe8d07480e8de084c0362dd51e27df2f166f7923ff26"
@@ -248,29 +249,29 @@
     {
       "task": 6,
       "mode": "m2",
-      "median_construction_seconds": 0.42418583401013166,
-      "max_peak_process_mib": 196.265625,
+      "median_construction_seconds": 0.42848079092800617,
+      "max_peak_process_mib": 196.953125,
       "retained_tags": 40416,
       "matches": 7886,
       "result_sha256": "1362f56ee560f63a5eeffe8d07480e8de084c0362dd51e27df2f166f7923ff26",
       "runs": [
         {
-          "construction_seconds": 0.4210420420859009,
-          "peak_process_mib": 196.265625,
+          "construction_seconds": 0.42848079092800617,
+          "peak_process_mib": 196.953125,
           "retained_tags": 40416,
           "matches": 7886,
           "result_sha256": "1362f56ee560f63a5eeffe8d07480e8de084c0362dd51e27df2f166f7923ff26"
         },
         {
-          "construction_seconds": 0.42689045798033476,
-          "peak_process_mib": 184.140625,
+          "construction_seconds": 0.4219952500425279,
+          "peak_process_mib": 183.890625,
           "retained_tags": 40416,
           "matches": 7886,
           "result_sha256": "1362f56ee560f63a5eeffe8d07480e8de084c0362dd51e27df2f166f7923ff26"
         },
         {
-          "construction_seconds": 0.42418583401013166,
-          "peak_process_mib": 188.546875,
+          "construction_seconds": 0.44076741696335375,
+          "peak_process_mib": 187.765625,
           "retained_tags": 40416,
           "matches": 7886,
           "result_sha256": "1362f56ee560f63a5eeffe8d07480e8de084c0362dd51e27df2f166f7923ff26"

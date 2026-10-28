@@ -44,21 +44,21 @@ file consisting almost entirely of one text node. Generated inputs are ignored b
 Git; [validation.json](validation.json) stores every raw run and result hash.
 
 Recorded on October 27, 2026 (America/Los_Angeles), Python 3.11.5, BeautifulSoup
-4.13.0 course source, lxml 5.3.2, macOS arm64; parser: `html.parser`.
+4.13.0 course source, lxml 5.3.2, SoupSieve 2.6, macOS arm64; parser: `html.parser`.
 Input size: **16,777,216 bytes**. Input SHA-256:
 `1dcfc307c4a7998de67e219a20c53abf10f25446fd1aa5f7796cad25ff0dd9e5`.
 Each mode ran three times in fresh subprocesses, alternating full and M2 modes.
 
 | Task | Mode | Median construction seconds | Max process RSS MiB | Retained tags | Matches |
 | --- | --- | ---: | ---: | ---: | ---: |
-| 2 | Full parse / M1 style | 0.4320 | 139.0 | 40,416 | 493 |
-| 2 | M2 | 0.2324 | 67.8 | 986 | 493 |
-| 3 | Full parse / M1 style | 0.4218 | 138.8 | 40,416 | 40,416 |
-| 3 | M2 | 0.4157 | 138.8 | 40,416 | 40,416 |
-| 4 | Full parse / M1 style | 0.4183 | 138.3 | 40,416 | 247 |
-| 4 | M2 | 0.2439 | 68.5 | 1,482 | 247 |
-| 6 | Full parse / M1 style | 0.4259 | 196.7 | 40,416 | 7,886 |
-| 6 | M2 | 0.4242 | 196.3 | 40,416 | 7,886 |
+| 2 | Full parse / M1 style | 0.4244 | 139.8 | 40,416 | 493 |
+| 2 | M2 | 0.2431 | 66.9 | 986 | 493 |
+| 3 | Full parse / M1 style | 0.4460 | 138.7 | 40,416 | 40,416 |
+| 3 | M2 | 0.4308 | 138.3 | 40,416 | 40,416 |
+| 4 | Full parse / M1 style | 0.4280 | 137.9 | 40,416 | 247 |
+| 4 | M2 | 0.2580 | 68.5 | 1,482 | 247 |
+| 6 | Full parse / M1 style | 0.4494 | 190.2 | 40,416 | 7,886 |
+| 6 | M2 | 0.4285 | 197.0 | 40,416 | 7,886 |
 
 Construction timing includes reading and parsing; for baseline task 6 it also
 includes the post-parse `find_all("b")` and rename loop. It excludes process startup,

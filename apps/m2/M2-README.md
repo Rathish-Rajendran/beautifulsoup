@@ -9,7 +9,7 @@ The root [README](../../README.md) contains installation, build, and run command
   parsing. `find_all("a", href=True)` then prints destinations in document order,
   preserving Milestone 1 behavior, including empty href values and excluding
   placeholder anchors with no href.
-- **Task 3:** `SoupStrainer(True)` is the requested attempt to keep every tag.
+- **Task 3:** `SoupStrainer(True)` attempts to retain every tag.
   This accepts outermost elements and therefore their entire subtrees. It cannot
   save meaningful tree memory or skip their text. Dropping any tag would make
   the output incomplete. Use full parsing for this use case in practice.
@@ -25,8 +25,8 @@ input; this API is not a bounded-memory stream. In particular, BeautifulSoup rea
 an input file handle in full before parsing it. `html5lib` does not honor parse_only,
 so these applications deliberately offer compatible parsers only.
 
-The handout says “two application programs” and also requests task 3 separately.
-All three requested files (`task2.py`, `task3.py`, `task4.py`) are included.
+Part 1 is implemented in three separate applications: `task2.py`, `task3.py`,
+and `task4.py`. Task 3 includes the all-tag strainer attempt and its limitations.
 
 ## Large-file validation
 
@@ -83,7 +83,7 @@ requirement. The earlier 1 GiB Milestone 1 results remain in `apps/m1/README.md`
 ## Part 2: original API locations
 
 Every location below refers to **unmodified course source**, tagged
-[`canvas-baseline`](https://github.com/Rathish-Rajendran/SWE262P_Project/tree/canvas-baseline)
+[`canvas-baseline`](https://github.com/Rathish-Rajendran/beautifulsoup/tree/canvas-baseline)
 (commit `0c57a7b`), before any M2 implementation changes. All 32 original `bs4`
 Python files at that tag match the supplied `beautifulsoup.zip` byte for byte.
 The prior Milestone 1 runtime used an installed 4.15.0 distribution; the assignment
@@ -91,18 +91,18 @@ asks for locations in the supplied 4.13.0 source, which is what this table recor
 
 | Used API / operation | Original definition | Used by |
 | --- | --- | --- |
-| `BeautifulSoup(...)` / constructor | [`bs4/__init__.py:209`](https://github.com/Rathish-Rajendran/SWE262P_Project/blob/canvas-baseline/bs4/__init__.py#L209), class at 133 | Every M1 and M2 app |
-| `soup.prettify()` (`Tag.prettify`) | [`bs4/element.py:2601`](https://github.com/Rathish-Rajendran/SWE262P_Project/blob/canvas-baseline/bs4/element.py#L2601) | M1 task 1 |
-| `soup.find_all(...)` (`Tag.find_all`) | [`bs4/element.py:2715`](https://github.com/Rathish-Rajendran/SWE262P_Project/blob/canvas-baseline/bs4/element.py#L2715) | M1 tasks 2–7; M2 tasks 2–4 |
-| `tag.find_parent(id=True)` (`PageElement.find_parent`) | [`bs4/element.py:992`](https://github.com/Rathish-Rajendran/SWE262P_Project/blob/canvas-baseline/bs4/element.py#L992) | M1 task 5 |
-| `tag.get_text(" ", strip=True)` (`PageElement.get_text`) | [`bs4/element.py:524`](https://github.com/Rathish-Rajendran/SWE262P_Project/blob/canvas-baseline/bs4/element.py#L524) | M1 tasks 5 and 8 |
-| `soup.select(...)` (`Tag.select`) | [`bs4/element.py:2799`](https://github.com/Rathish-Rajendran/SWE262P_Project/blob/canvas-baseline/bs4/element.py#L2799) | M1 task 8; delegates to `CSS.select`, `bs4/css.py:161`, then SoupSieve |
-| `tag["href"]`, `tag["id"]` (`Tag.__getitem__`) | [`bs4/element.py:2203`](https://github.com/Rathish-Rajendran/SWE262P_Project/blob/canvas-baseline/bs4/element.py#L2203) | M1 tasks 2, 4, 5; M2 tasks 2, 4 |
-| `tag["class"] = "test"` (`Tag.__setitem__`) | [`bs4/element.py:2223`](https://github.com/Rathish-Rajendran/SWE262P_Project/blob/canvas-baseline/bs4/element.py#L2223) | M1 task 7 |
-| `tag.name` / `tag.name = "blockquote"` | [`bs4/element.py:1740`](https://github.com/Rathish-Rajendran/SWE262P_Project/blob/canvas-baseline/bs4/element.py#L1740); ordinary field, initialized at 1648 in `Tag.__init__` (1618) | M1 tasks 3–8 as relevant; M2 tasks 3, 4 |
-| `str(soup)` (`Tag.__str__`) | [`bs4/element.py:2302`](https://github.com/Rathish-Rajendran/SWE262P_Project/blob/canvas-baseline/bs4/element.py#L2302), alias to `Tag.__repr__` at 2298 | M1 tasks 6, 7; M2 task 6 |
-| `SoupStrainer(...)` / constructor | [`bs4/filter.py:345`](https://github.com/Rathish-Rajendran/SWE262P_Project/blob/canvas-baseline/bs4/filter.py#L345), class at 313 | M2 Part 1 tasks 2, 3, 4 |
-| `FeatureNotFound` (imported/caught exception) | [`bs4/exceptions.py:10`](https://github.com/Rathish-Rajendran/SWE262P_Project/blob/canvas-baseline/bs4/exceptions.py#L10) | All apps' parser error handling |
+| `BeautifulSoup(...)` / constructor | [`bs4/__init__.py:209`](https://github.com/Rathish-Rajendran/beautifulsoup/blob/canvas-baseline/bs4/__init__.py#L209), class at 133 | Every M1 and M2 app |
+| `soup.prettify()` (`Tag.prettify`) | [`bs4/element.py:2601`](https://github.com/Rathish-Rajendran/beautifulsoup/blob/canvas-baseline/bs4/element.py#L2601) | M1 task 1 |
+| `soup.find_all(...)` (`Tag.find_all`) | [`bs4/element.py:2715`](https://github.com/Rathish-Rajendran/beautifulsoup/blob/canvas-baseline/bs4/element.py#L2715) | M1 tasks 2–7; M2 tasks 2–4 |
+| `tag.find_parent(id=True)` (`PageElement.find_parent`) | [`bs4/element.py:992`](https://github.com/Rathish-Rajendran/beautifulsoup/blob/canvas-baseline/bs4/element.py#L992) | M1 task 5 |
+| `tag.get_text(" ", strip=True)` (`PageElement.get_text`) | [`bs4/element.py:524`](https://github.com/Rathish-Rajendran/beautifulsoup/blob/canvas-baseline/bs4/element.py#L524) | M1 tasks 5 and 8 |
+| `soup.select(...)` (`Tag.select`) | [`bs4/element.py:2799`](https://github.com/Rathish-Rajendran/beautifulsoup/blob/canvas-baseline/bs4/element.py#L2799) | M1 task 8; delegates to `CSS.select`, `bs4/css.py:161`, then SoupSieve |
+| `tag["href"]`, `tag["id"]` (`Tag.__getitem__`) | [`bs4/element.py:2203`](https://github.com/Rathish-Rajendran/beautifulsoup/blob/canvas-baseline/bs4/element.py#L2203) | M1 tasks 2, 4, 5; M2 tasks 2, 4 |
+| `tag["class"] = "test"` (`Tag.__setitem__`) | [`bs4/element.py:2223`](https://github.com/Rathish-Rajendran/beautifulsoup/blob/canvas-baseline/bs4/element.py#L2223) | M1 task 7 |
+| `tag.name` / `tag.name = "blockquote"` | [`bs4/element.py:1740`](https://github.com/Rathish-Rajendran/beautifulsoup/blob/canvas-baseline/bs4/element.py#L1740); ordinary field, initialized at 1648 in `Tag.__init__` (1618) | M1 tasks 3–8 as relevant; M2 tasks 3, 4 |
+| `str(soup)` (`Tag.__str__`) | [`bs4/element.py:2302`](https://github.com/Rathish-Rajendran/beautifulsoup/blob/canvas-baseline/bs4/element.py#L2302), alias to `Tag.__repr__` at 2298 | M1 tasks 6, 7; M2 task 6 |
+| `SoupStrainer(...)` / constructor | [`bs4/filter.py:345`](https://github.com/Rathish-Rajendran/beautifulsoup/blob/canvas-baseline/bs4/filter.py#L345), class at 313 | M2 Part 1 tasks 2, 3, 4 |
+| `FeatureNotFound` (imported/caught exception) | [`bs4/exceptions.py:10`](https://github.com/Rathish-Rajendran/beautifulsoup/blob/canvas-baseline/bs4/exceptions.py#L10) | All apps' parser error handling |
 
 Supporting internal calls: `find_parent` delegates to `PageElement.find_parents`
 at `bs4/element.py:1022`; `Tag.__repr__` calls `decode` (`Tag.decode` at
@@ -177,7 +177,7 @@ CI uses these exact runtime versions; no original tests are weakened or skipped.
 The original suite contributes 829 passes and seven existing skips; M2 contributes
 58 API test instances and 14 application tests.
 
-The two explicitly requested new cases are
+The two primary API cases are
 `test_replaces_all_b_tags` and `test_nested_replacements_keep_closing_tags_and_siblings`,
 each exercised on three parsers. Additional cases cover preservation of nonmatches,
 empty/self-closing nodes, unfinished/malformed markup, XML namespaces and case,
@@ -199,6 +199,8 @@ outside the checkout to ensure the new module is actually packaged.
 | Performance | 40 | Existing close-event hook; no new tree walk or O(K) replacement list; structural proof and candid timing/memory measurements |
 | Build | 5 | Executable `build.sh`, reproducible requirements, wheel/sdist build and install verification, CI |
 
-Submit the `milestone-2` release/tag link listed in the root README. This repository
-uses the owner-requested private name `SWE262P_Project`; the handout's suggested
-name was `beautifulsoup`. The private repository needs grader access.
+The submission is the `milestone-2` release/tag of
+[`Rathish-Rajendran/beautifulsoup`](https://github.com/Rathish-Rajendran/beautifulsoup),
+with the exact repository name and source layout specified in the assignment.
+The repository is private and requires grader access. See [COMPLIANCE.md](COMPLIANCE.md)
+for the detailed requirement review.

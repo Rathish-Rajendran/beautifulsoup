@@ -1,18 +1,18 @@
-# SWE262P Project — Milestone 2
+# BeautifulSoup — SWE262P Milestone 2
 
-Course-source BeautifulSoup 4.13.0 extended with **`SoupReplacer(og_tag, alt_tag)`**.
+This project extends BeautifulSoup 4.13.0 with **`SoupReplacer(og_tag, alt_tag)`**.
 Replacement happens while parsing, without a second tree search. Original code and
 MIT attribution are preserved; this is a course extension, not an upstream release.
 
-## Grader quick start
+## Installation, tests, and build
 
 Use Python **3.10.13 or 3.11.5** to reproduce the supplied source tests
 (locally verified with 3.11.5). Let `python3` below name that interpreter.
 From a fresh clone:
 
 ```sh
-git clone https://github.com/Rathish-Rajendran/SWE262P_Project.git
-cd SWE262P_Project
+git clone https://github.com/Rathish-Rajendran/beautifulsoup.git
+cd beautifulsoup
 git checkout milestone-2
 python3 -m venv .venv
 source .venv/bin/activate
@@ -26,7 +26,8 @@ upstream tests. The build produces a wheel and source archive under `dist/`.
 For an explicit interpreter: `PYTHON=.venv/bin/python ./build.sh`.
 The development requirements pin lxml 5.3.2 because lxml 6.1.3 changes three
 behaviors expected by the unmodified course-source tests. CI checks Python 3.10.13
-and 3.11.5, runs the suite, builds the package, and tests the wheel outside the checkout. Newer Python patch releases change
+and 3.11.5, runs the suite, builds the package, and tests the wheel outside the
+checkout. Newer Python patch releases change
 malformed-declaration handling in `html.parser`, making three original rejection
 tests fail; the exact runtime versions avoid that upstream test incompatibility.
 
@@ -80,15 +81,15 @@ The Milestone 3 callable/attribute transformations are outside this milestone.
 
 ## Submission and history
 
-- Submit the [Milestone 2 release](https://github.com/Rathish-Rajendran/SWE262P_Project/releases/tag/milestone-2).
-- [Milestone 2 tag](https://github.com/Rathish-Rajendran/SWE262P_Project/tree/milestone-2) fixes the graded source revision; future milestones use new tags.
+- Submit the [Milestone 2 release](https://github.com/Rathish-Rajendran/beautifulsoup/releases/tag/milestone-2).
+- [Milestone 2 tag](https://github.com/Rathish-Rajendran/beautifulsoup/tree/milestone-2) fixes the graded source revision; future milestones use new tags.
 - `canvas-baseline` contains the unmodified imported source. All 32 original `bs4`
   Python files were verified byte-for-byte against the supplied ZIP.
 - `apps/m1/` preserves the previously implemented Milestone 1 programs unchanged.
-- The repository is **private** and named **SWE262P_Project**, following the owner's
-  explicit request. The course handout instead names `beautifulsoup`; the source
-  layout still matches the handout. Grant the grader GitHub access before submission.
+- The repository is named **beautifulsoup**, matching the assignment. It is private;
+  the grader must have repository access to open the submission link.
 
-See [M2-README.md](apps/m2/M2-README.md) for all milestone answers and design details.
+See [M2-README.md](apps/m2/M2-README.md) for the milestone answers and design details,
+and [COMPLIANCE.md](apps/m2/COMPLIANCE.md) for the requirement-by-requirement review.
 Upstream: [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/).
 Original license: [LICENSE](LICENSE).

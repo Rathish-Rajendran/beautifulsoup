@@ -67,6 +67,15 @@ include = [
     # The file that announces support for type hints per PEP-0561.
     "/bs4/py.typed",
 
+    # Milestone applications, reproducibility, and build instructions.
+    "/apps/**/*.py",
+    "/apps/**/*.md",
+    "/apps/m2/fixtures/*",
+    "/apps/m2/validation.json",
+    "/build.sh",
+    "/requirements-dev.txt",
+    "/.github/workflows/ci.yml",
+
     # The tox build configuration
     "tox.ini",
 

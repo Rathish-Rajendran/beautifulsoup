@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:x="urn:test">
+  <section id="intro"><b class="bold">outer <b>inner</b> tail</b></section>
+  <a href="https://example.com/"><label>Link</label></a><a>Placeholder</a>
+  <p id="">An empty ID is still present.</p><x:b>Namespaced bold</x:b><B>Case-sensitive</B>
+</root>

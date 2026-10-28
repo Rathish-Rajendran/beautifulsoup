@@ -1,4 +1,6 @@
 .DS_Store
+# Reproducible large inputs and CLI outputs stay local.
+apps/m2/generated/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

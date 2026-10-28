@@ -27,6 +27,7 @@ __all__ = [
     "Declaration",
     "ProcessingInstruction",
     "ResultSet",
+    "SoupReplacer",
     "CSS",
     "Script",
     "Stylesheet",
@@ -88,6 +89,7 @@ from .element import (
     TemplateString,
 )
 from .formatter import Formatter
+from .replacer import SoupReplacer
 from .filter import (
     ElementFilter,
     SoupStrainer,
@@ -180,6 +182,7 @@ class BeautifulSoup(Tag):
     is_xml: bool
     known_xml: Optional[bool]
     parse_only: Optional[SoupStrainer]  #: :meta private:
+    replacer: Optional[SoupReplacer]  #: :meta private:
 
     # These members are only used while parsing markup.
     markup: Optional[_RawMarkup]  #: :meta private:
@@ -215,6 +218,7 @@ class BeautifulSoup(Tag):
         from_encoding: Optional[_Encoding] = None,
         exclude_encodings: Optional[_Encodings] = None,
         element_classes: Optional[Dict[Type[PageElement], Type[PageElement]]] = None,
+        replacer: Optional[SoupReplacer] = None,
         **kwargs: Any,
     ):
         """Constructor.
@@ -243,6 +247,10 @@ class BeautifulSoup(Tag):
         :param from_encoding: A string indicating the encoding of the
          document to be parsed. Pass this in if Beautiful Soup is
          guessing wrongly about the document's encoding.
+
+        :param replacer: A SoupReplacer that renames tags as they close
+         during parsing. Supported by html.parser and lxml (HTML/XML).
+         A parse_only filter matches original input names, before replacement.
 
         :param exclude_encodings: A list of strings indicating
          encodings known to be wrong. Pass this in if you don't know
@@ -342,6 +350,9 @@ class BeautifulSoup(Tag):
             from_encoding = None
 
         self.element_classes = element_classes or dict()
+        if replacer is not None and not isinstance(replacer, SoupReplacer):
+            raise TypeError("replacer must be a SoupReplacer or None")
+        self.replacer = replacer
 
         # We need this information to track whether or not the builder
         # was specified well enough that we can omit the 'you need to
@@ -431,6 +442,11 @@ class BeautifulSoup(Tag):
                 )
 
         self.builder = builder
+        if replacer is not None and builder.NAME == "html5lib":
+            raise ValueError(
+                "SoupReplacer does not support html5lib's tree reconstruction; "
+                "use html.parser or lxml instead."
+            )
         self.is_xml = builder.is_xml
         self.known_xml = self.is_xml
         self._namespaces = dict()
@@ -495,7 +511,7 @@ class BeautifulSoup(Tag):
 
         This is the first step of the deepcopy process.
         """
-        clone = type(self)("", None, self.builder)
+        clone = type(self)("", None, self.builder, replacer=self.replacer)
 
         # Keep track of the encoding of the original document,
         # since we won't be parsing it again.
@@ -801,6 +817,13 @@ class BeautifulSoup(Tag):
             self.preserve_whitespace_tag_stack.pop()
         if self.string_container_stack and tag == self.string_container_stack[-1]:
             self.string_container_stack.pop()
+        # Wait until stack bookkeeping has used the original name. Renaming
+        # an open tag would break matching of the source's closing tag and
+        # raw-text/whitespace handling. This is still inside the parser's
+        # existing close event (including implicit closes and EOF cleanup),
+        # so no additional tree traversal or match list is necessary.
+        if self.replacer is not None:
+            self.replacer.replace(tag)
         # print("Pop", tag.name)
         if self.tagStack:
             self.currentTag = self.tagStack[-1]

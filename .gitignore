@@ -1,6 +1,9 @@
 .DS_Store
 # Reproducible large inputs and CLI outputs stay local.
 apps/m2/generated/
+# Detailed local verification records are not part of the submission.
+apps/m2/validation.json
+apps/m2/validation-gb.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

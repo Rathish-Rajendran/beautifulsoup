@@ -248,7 +248,7 @@ class BeautifulSoup(Tag):
          document to be parsed. Pass this in if Beautiful Soup is
          guessing wrongly about the document's encoding.
 
-        :param replacer: A SoupReplacer that renames tags as they close
+        :param replacer: A SoupReplacer that transforms tags as they close
          during parsing. Supported by html.parser and lxml (HTML/XML).
          A parse_only filter matches original input names, before replacement.
 
@@ -824,6 +824,12 @@ class BeautifulSoup(Tag):
         # so no additional tree traversal or match list is necessary.
         if self.replacer is not None:
             self.replacer.replace(tag)
+            if self.replacer.xformer is not None and self.tagStack:
+                # An in-place callback may change the tail of the parsed tree.
+                parent = self.tagStack[-1]
+                self._most_recent_element = parent._last_descendant(
+                    is_initialized=False, accept_self=parent is not self
+                )
         # print("Pop", tag.name)
         if self.tagStack:
             self.currentTag = self.tagStack[-1]

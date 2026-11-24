@@ -1099,6 +1099,10 @@ class BeautifulSoup(Tag):
         """
         self.current_data.append(data)
 
+    def __iter__(self) -> Iterator[PageElement]:
+        """Yield the parsed document's descendant nodes in document order."""
+        return self.descendants
+
     def decode(
         self,
         indent_level: Optional[int] = None,
